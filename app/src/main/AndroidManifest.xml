@@ -5,9 +5,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/mine"
+        android:icon="@mipmap/cbc"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/mine"
+        android:roundIcon="@mipmap/cbc"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="ca.wlu.amalik.cbcnews.MainActivity">
