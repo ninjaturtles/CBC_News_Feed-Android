@@ -55,6 +55,13 @@ public class NewsListFragment extends Fragment {
         if (isNetworkAvailable()) {
             Log.v("HTTP", "Network available");
 
+            if (savedInstanceState != null){
+                ArrayList<Article> newNews = savedInstanceState.getParcelableArrayList(KEY_NEWS);
+                News.get(getActivity()).setArticles(newNews);
+            } else {
+                new DownloadWebpageTask().execute();
+            }
+
         } else {
             Toast.makeText(getActivity(), "Network not available", Toast.LENGTH_SHORT).show();
             Log.v("HTTP", "Network NOT available");
@@ -76,14 +83,8 @@ public class NewsListFragment extends Fragment {
 
         mRSSParser = new RSSParser();
 
-        if (isNetworkAvailable()){
-            if (savedInstanceState != null){
-                ArrayList<Article> newNews = savedInstanceState.getParcelableArrayList(KEY_NEWS);
-                News.get(getActivity()).setArticles(newNews);
-            } else {
-                new DownloadWebpageTask().execute();
-            }
-        } //networkAvailable
+
+         //networkAvailable
 
         //
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
@@ -256,6 +257,7 @@ public class NewsListFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
+        News.get(getActivity()).clearArticles();
         updateUI();
     }
 
