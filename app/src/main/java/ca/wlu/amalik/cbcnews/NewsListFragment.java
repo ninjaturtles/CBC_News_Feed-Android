@@ -97,7 +97,6 @@ public class NewsListFragment extends Fragment {
 
             void refreshItems(){
                 if(isNetworkAvailable()) {
-                    News.get(getActivity()).clearArticles();
                     new DownloadWebpageTask().execute();// Load items
                 }
                 // Load complete
@@ -131,6 +130,7 @@ public class NewsListFragment extends Fragment {
     private class DownloadWebpageTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
+            News.get(getActivity()).clearArticles();
             try {
                 downloadUrl(baseURL);
                 return "Web page retrieved";
@@ -257,7 +257,6 @@ public class NewsListFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        News.get(getActivity()).clearArticles();
         updateUI();
     }
 
